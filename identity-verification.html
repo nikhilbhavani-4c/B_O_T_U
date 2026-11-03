@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>B.O.T.U. – Identity Verification | Quantum Token Recharge</title>
+
+  <!-- Elite Futuristic Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cyber Background Elements -->
+  <div class="cyber-bg">
+    <div class="cyber-grid"></div>
+    <div class="cyber-vignette"></div>
+    <div class="cyber-cosmic-glow"></div>
+  </div>
+
+  <!-- Realtime Laser Scanline Beam -->
+  <div class="scan-line"></div>
+
+  <!-- Transition Portal Overlay -->
+  <div class="transition-overlay" id="transition-overlay">
+    <div class="transition-portal">
+      <span class="transition-portal-text">WARPING...</span>
+    </div>
+  </div>
+
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Zero-Scroll Main Viewport -->
+  <div class="page-container">
+    <div class="page-content page-enter">
+
+      <!-- Header & Step Tracker -->
+      <header class="page-header">
+        <div class="mission-hud-bar">
+          <div class="hud-left">
+            <div class="hud-pill">
+              <div class="hud-pulse-dot" id="hud-dot"></div>
+              <span id="hud-status">BIOMETRICS // SCANNING...</span>
+            </div>
+            <div class="hud-oscilloscope" aria-hidden="true">
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+            </div>
+          </div>
+          <div class="hud-right">
+            <div class="hud-telemetry-tag">
+              <span>NODE:</span>
+              <span class="tag-badge">OMEGA-7</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-header">
+          <div class="brand-eyebrow">
+            <span>🛡️</span> SECURITY CLEARANCE <span>🛡️</span>
+          </div>
+          <h1 class="brand-title">IDENTITY VERIFICATION</h1>
+          <p class="brand-subtitle">Operator Authentication for B.O.T.U. Core Access</p>
+        </div>
+
+        <!-- 6-Phase Step Tracker -->
+        <nav class="step-stepper" aria-label="Recharge Progress">
+          <div class="step-item completed">
+            <div class="step-bar"></div>
+            <span class="step-label">01 BOOT</span>
+          </div>
+          <div class="step-item active">
+            <div class="step-bar"></div>
+            <span class="step-label">02 VERIFY</span>
+          </div>
+          <div class="step-item">
+            <div class="step-bar"></div>
+            <span class="step-label">03 TOKEN</span>
+          </div>
+          <div class="step-item">
+            <div class="step-bar"></div>
+            <span class="step-label">04 REACTOR</span>
+          </div>
+          <div class="step-item">
+            <div class="step-bar"></div>
+            <span class="step-label">05 INJECT</span>
+          </div>
+          <div class="step-item">
+            <div class="step-bar"></div>
+            <span class="step-label">06 ONLINE</span>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Center Biometric Scanning Stage Card -->
+      <main class="robot-stage-card">
+        <div class="corner-bracket corner-tl"></div>
+        <div class="corner-bracket corner-tr"></div>
+        <div class="corner-bracket corner-bl"></div>
+        <div class="corner-bracket corner-br"></div>
+
+        <div class="stage-visual">
+          <div class="biometric-scanner-box">
+            <!-- Rotating Reticles -->
+            <div class="scanner-reticle" id="scanner-reticle">
+              <div class="scanner-reticle-inner">
+                <!-- Laser Sweep Bar -->
+                <div class="scan-laser-bar" id="scan-laser"></div>
+              </div>
+
+              <!-- High-Tech Biometric Cyber SVG -->
+              <div class="biometric-icon-wrap">
+                <svg class="biometric-icon-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Concentric Fingerprint / Cyber Retina Arcs -->
+                  <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.4" />
+                  <path d="M50 15 C30 15 15 30 15 50 C15 70 30 85 50 85" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  <path d="M50 25 C36 25 25 36 25 50 C25 64 36 75 50 75" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  <path d="M50 35 C42 35 35 42 35 50 C35 58 42 65 50 65" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M60 30 C72 38 75 55 68 68 C63 76 55 80 50 80" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  <circle cx="50" cy="50" r="6" fill="currentColor" />
+                  <!-- Target Crosshairs -->
+                  <line x1="10" y1="50" x2="22" y2="50" stroke="currentColor" stroke-width="2" />
+                  <line x1="78" y1="50" x2="90" y2="50" stroke="currentColor" stroke-width="2" />
+                  <line x1="50" y1="10" x2="50" y2="22" stroke="currentColor" stroke-width="2" />
+                  <line x1="50" y1="78" x2="50" y2="90" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Dynamic Scan Status Pill -->
+            <div class="scan-status-pill" id="scan-pill">
+              <span id="scan-pill-text">AUTHENTICATING NEURAL SIGNATURE...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Telemetry Progress -->
+        <div class="charge-stats-card">
+          <div class="stat-header-row">
+            <div class="stat-label-col">
+              <span class="stat-label-sub">CLEARANCE PROTOCOL</span>
+              <span class="stat-label-main" id="stat-auth-label">VERIFYING CITIZEN PASS</span>
+            </div>
+            <div class="energy-percent-display">
+              <span id="scan-percent">0</span><span class="energy-percent-unit">%</span>
+            </div>
+          </div>
+
+          <div class="progress-bar-container">
+            <div class="progress-track">
+              <div class="progress-fill" id="scan-progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="telemetry-grid">
+            <div class="telemetry-item">
+              <span class="telemetry-key">ID HASH</span>
+              <span class="telemetry-val">0x7F...9A4</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-key">SECURITY</span>
+              <span class="telemetry-val" id="stat-sec-level">SCANNING</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-key">CLEARANCE</span>
+              <span class="telemetry-val" id="stat-clearance">PENDING</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Primary Action Footer -->
+      <footer class="page-footer">
+        <button class="primary-btn" id="continue-btn" disabled>
+          <span>CONTINUE TO TOKEN SCAN</span> <span>▶</span>
+        </button>
+        <div class="footer-info">
+          <span>B.O.T.U. (BHAINS OF THE UNIVERSE) • QUANTUM EVENT TERMINAL</span>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="botu-core.js"></script>
+  <script>
+    function startBiometricScan() {
+      const scanFill = document.getElementById('scan-progress-fill');
+      const scanPercent = document.getElementById('scan-percent');
+      const scanPill = document.getElementById('scan-pill');
+      const scanPillText = document.getElementById('scan-pill-text');
+      const continueBtn = document.getElementById('continue-btn');
+      const hudStatus = document.getElementById('hud-status');
+      const hudDot = document.getElementById('hud-dot');
+      const statSec = document.getElementById('stat-sec-level');
+      const statClearance = document.getElementById('stat-clearance');
+      const statAuthLabel = document.getElementById('stat-auth-label');
+
+      // Auto biometric scan sequence - Cinematic 4-second experience
+      let currentProgress = 0;
+      try {
+        window.BOTU.sound.ensureContext();
+        window.BOTU.sound.playScannerSound();
+      } catch (e) {}
+
+      // Sweep sound repeat every 1.5s while scanning
+      const sweepTimer = setInterval(() => {
+        if (currentProgress < 85) {
+          try {
+            window.BOTU.sound.playScannerSound();
+          } catch (e) {}
+        }
+      }, 1500);
+
+      const scanInterval = setInterval(() => {
+        currentProgress += 2;
+        if (currentProgress > 100) currentProgress = 100;
+
+        if (scanFill) scanFill.style.width = currentProgress + '%';
+        if (scanPercent) scanPercent.textContent = currentProgress;
+
+        if (hudStatus) {
+          hudStatus.textContent = 'BIOMETRICS // SCANNING (' + currentProgress + '%)...';
+        }
+
+        // Periodic high-tech telemetry audio chirps
+        if (currentProgress % 10 === 0 && currentProgress < 100) {
+          try {
+            window.BOTU.sound.playBlip(720 + currentProgress * 6, 0.05);
+          } catch (e) {}
+        }
+
+        // Incremental security levels
+        if (statSec) {
+          if (currentProgress < 30) statSec.textContent = 'LEVEL-1';
+          else if (currentProgress < 60) statSec.textContent = 'LEVEL-2';
+          else if (currentProgress < 90) statSec.textContent = 'LEVEL-3';
+          else statSec.textContent = 'LEVEL-4';
+        }
+
+        if (statClearance) {
+          statClearance.textContent = currentProgress < 100 ? 'ANALYZING' : 'GRANTED';
+        }
+
+        if (currentProgress >= 100) {
+          clearInterval(scanInterval);
+          clearInterval(sweepTimer);
+
+          // Verification Complete
+          try {
+            window.BOTU.sound.playLockSound();
+          } catch (e) {}
+          if (scanPill) {
+            scanPill.classList.add('verified');
+            if (scanPillText) scanPillText.textContent = '✓ IDENTITY VERIFIED: COSMIC OPERATOR #7701';
+          }
+          if (hudStatus) hudStatus.textContent = 'SECURITY: VERIFIED';
+          if (hudDot) hudDot.classList.add('online');
+
+          if (statSec) statSec.textContent = 'LEVEL-4 (OMEGA)';
+          if (statClearance) statClearance.textContent = 'GRANTED';
+          if (statAuthLabel) statAuthLabel.textContent = 'OPERATOR AUTHORIZED';
+
+          // Unlock Continue Button
+          if (continueBtn) {
+            continueBtn.disabled = false;
+            continueBtn.classList.add('btn-pulse');
+          }
+        }
+      }, 80);
+
+      if (continueBtn) {
+        continueBtn.addEventListener('click', () => {
+          window.BOTU.navigator.navigateTo('token-detection.html');
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startBiometricScan);
+    } else {
+      startBiometricScan();
+    }
+  </script>
+</body>
+</html>
+

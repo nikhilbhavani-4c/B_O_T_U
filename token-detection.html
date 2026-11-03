@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>B.O.T.U. – Token Detection | Quantum Token Recharge</title>
+
+  <!-- Elite Futuristic Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cyber Background Elements -->
+  <div class="cyber-bg">
+    <div class="cyber-grid"></div>
+    <div class="cyber-vignette"></div>
+    <div class="cyber-cosmic-glow"></div>
+  </div>
+
+  <!-- Realtime Laser Scanline Beam -->
+  <div class="scan-line"></div>
+
+  <!-- Transition Portal Overlay -->
+  <div class="transition-overlay" id="transition-overlay">
+    <div class="transition-portal">
+      <span class="transition-portal-text">WARPING...</span>
+    </div>
+  </div>
+
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Zero-Scroll Main Viewport -->
+  <div class="page-container">
+    <div class="page-content page-enter">
+
+      <!-- Header & Step Tracker -->
+      <header class="page-header">
+        <div class="mission-hud-bar">
+          <div class="hud-left">
+            <div class="hud-pill">
+              <div class="hud-pulse-dot" id="hud-dot"></div>
+              <span id="hud-status">RECEPTACLE // SCANNING FREQUENCY...</span>
+            </div>
+            <div class="hud-oscilloscope" aria-hidden="true">
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+            </div>
+          </div>
+          <div class="hud-right">
+            <div class="hud-telemetry-tag">
+              <span>NODE:</span>
+              <span class="tag-badge">OMEGA-7</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-header">
+          <div class="brand-eyebrow">
+            <span>💠</span> HOLOGRAPHIC RECEPTACLE <span>💠</span>
+          </div>
+          <h1 class="brand-title">TOKEN DETECTION</h1>
+          <p class="brand-subtitle">Scanning Quantum Resonance Field for Token Cell</p>
+        </div>
+
+        <!-- 6-Phase Step Tracker -->
+        <nav class="step-stepper" aria-label="Recharge Progress">
+          <div class="step-item completed">
+            <div class="step-bar"></div>
+            <span class="step-label">01 BOOT</span>
+          </div>
+          <div class="step-item completed">
+            <div class="step-bar"></div>
+            <span class="step-label">02 VERIFY</span>
+          </div>
+          <div class="step-item active">
+            <div class="step-bar"></div>
+            <span class="step-label">03 TOKEN</span>
+          </div>
+          <div class="step-item">
+            <div class="step-bar"></div>
+            <span class="step-label">04 REACTOR</span>
+          </div>
+          <div class="step-item">
+            <div class="step-bar"></div>
+            <span class="step-label">05 INJECT</span>
+          </div>
+          <div class="step-item">
+            <div class="step-bar"></div>
+            <span class="step-label">06 ONLINE</span>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Center Floating Token Stage Card -->
+      <main class="robot-stage-card">
+        <div class="corner-bracket corner-tl"></div>
+        <div class="corner-bracket corner-tr"></div>
+        <div class="corner-bracket corner-bl"></div>
+        <div class="corner-bracket corner-br"></div>
+
+        <div class="stage-visual">
+          <div class="token-stage-box">
+            <div class="hologram-token-wrap" id="hologram-token-wrap" style="opacity: 0.4; transition: opacity 0.3s ease;">
+              <!-- Orbiting Gyro Rings -->
+              <div class="token-orbit-ring" id="token-ring-1"></div>
+              <div class="token-orbit-ring ring-2" id="token-ring-2"></div>
+
+              <!-- Floating Holographic Quantum Token Coin SVG -->
+              <svg class="token-coin-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="coinGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="40%" stop-color="#ffb703" />
+                    <stop offset="80%" stop-color="#f77f00" />
+                    <stop offset="100%" stop-color="#d62828" />
+                  </radialGradient>
+                  <linearGradient id="tokenNeon" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00f0ff" />
+                    <stop offset="100%" stop-color="#9d4edd" />
+                  </linearGradient>
+                  <filter id="tokenGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <!-- Outer Coin Bezel -->
+                <circle cx="100" cy="100" r="90" fill="#060b18" stroke="#00f0ff" stroke-width="3.5" filter="url(#tokenGlow)" />
+                <circle cx="100" cy="100" r="82" fill="none" stroke="#ffb703" stroke-width="2" stroke-dasharray="8 4" />
+
+                <!-- Internal Hexagon Cell -->
+                <polygon points="100,28 162,64 162,136 100,172 38,136 38,64" fill="url(#coinGrad)" opacity="0.9" />
+
+                <!-- Embossed B.O.T.U. Mecha Horns Emblem -->
+                <path d="M72 70 C58 52, 34 44, 20 48 C14 50, 16 58, 24 60 C40 64, 56 76, 66 86 Z" fill="#ffffff" opacity="0.95" />
+                <path d="M128 70 C142 52, 166 44, 180 48 C186 50, 184 58, 176 60 C160 64, 144 76, 134 86 Z" fill="#ffffff" opacity="0.95" />
+
+                <!-- Central Arc Orb -->
+                <circle cx="100" cy="100" r="28" fill="#030712" stroke="#00f0ff" stroke-width="2.5" />
+                <circle cx="100" cy="100" r="18" fill="#00f0ff" filter="url(#tokenGlow)" opacity="0.95" id="token-orb" />
+                <circle cx="100" cy="100" r="8" fill="#ffffff" />
+
+                <!-- Cyber Inscription -->
+                <text x="100" y="148" text-anchor="middle" fill="#ffffff" font-family="'Orbitron', sans-serif" font-size="10" font-weight="900" letter-spacing="2">B.O.T.U.</text>
+              </svg>
+            </div>
+
+            <!-- Token Match Callout -->
+            <div class="scan-status-pill" id="token-pill">
+              <span id="token-pill-text">SCANNING FOR QUANTUM TOKEN...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Telemetry Card -->
+        <div class="charge-stats-card">
+          <div class="stat-header-row">
+            <div class="stat-label-col">
+              <span class="stat-label-sub">PAYLOAD ENCRYPTION</span>
+              <span class="stat-label-main" id="stat-payload-label">QUANTUM RESO-CELL MK-IV</span>
+            </div>
+            <div class="energy-percent-display">
+              <span id="token-percent">0</span><span class="energy-percent-unit">% MATCH</span>
+            </div>
+          </div>
+
+          <div class="progress-bar-container">
+            <div class="progress-track">
+              <div class="progress-fill" id="token-progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <div class="telemetry-grid">
+            <div class="telemetry-item">
+              <span class="telemetry-key">ENERGY YIELD</span>
+              <span class="telemetry-val" id="stat-token-yield">0 CORES</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-key">HARMONIC</span>
+              <span class="telemetry-val" id="stat-token-harmonic">0.00%</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-key">STATUS</span>
+              <span class="telemetry-val" id="stat-token-status">SEARCHING</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Primary Action Footer -->
+      <footer class="page-footer">
+        <button class="primary-btn" id="continue-btn" disabled>
+          <span>SCANNING TOKEN FREQUENCY...</span>
+        </button>
+        <div class="footer-info">
+          <span>B.O.T.U. (BHAINS OF THE UNIVERSE) • QUANTUM EVENT TERMINAL</span>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="botu-core.js"></script>
+  <script>
+    function startTokenDetectionSequence() {
+      const fill = document.getElementById('token-progress-fill');
+      const percent = document.getElementById('token-percent');
+      const pill = document.getElementById('token-pill');
+      const pillText = document.getElementById('token-pill-text');
+      const continueBtn = document.getElementById('continue-btn');
+      const hudStatus = document.getElementById('hud-status');
+      const hudDot = document.getElementById('hud-dot');
+      const tokenWrap = document.getElementById('hologram-token-wrap');
+      const statYield = document.getElementById('stat-token-yield');
+      const statHarmonic = document.getElementById('stat-token-harmonic');
+      const statStatus = document.getElementById('stat-token-status');
+
+      let currentPct = 0;
+      try {
+        window.BOTU.sound.ensureContext();
+        window.BOTU.sound.playBlip(620, 0.08);
+      } catch (e) {}
+
+      // Cinematic 4-second token detection and harmonic lock
+      const detectInterval = setInterval(() => {
+        currentPct += 2;
+        if (currentPct > 100) currentPct = 100;
+
+        if (fill) fill.style.width = currentPct + '%';
+        if (percent) percent.textContent = currentPct;
+
+        // Dynamic Token Opacity and Brilliance
+        if (tokenWrap) {
+          tokenWrap.style.opacity = (0.4 + (currentPct / 100) * 0.6).toFixed(2);
+        }
+
+        // HUD Status
+        if (hudStatus) {
+          hudStatus.textContent = 'RECEPTACLE // SCANNING (' + currentPct + '%)...';
+        }
+
+        // Live Telemetry Climb
+        const yieldCores = Math.floor((currentPct / 100) * 500);
+        const harmonicVal = ((currentPct / 100) * 99.98).toFixed(2);
+        if (statYield) statYield.textContent = yieldCores + ' MEGA-CORES';
+        if (statHarmonic) statHarmonic.textContent = harmonicVal + '%';
+
+        // Periodic Sonar Telemetry Beeps
+        if (currentPct % 12 === 0 && currentPct < 100) {
+          try {
+            window.BOTU.sound.playBlip(580 + currentPct * 7, 0.065);
+          } catch (e) {}
+
+          // Spark particle from token
+          if (window.BOTU.particleEngine) {
+            const rect = tokenWrap.getBoundingClientRect();
+            window.BOTU.particleEngine.emitChargingSparks(rect.left + rect.width / 2, rect.top + rect.height / 2);
+          }
+        }
+
+        // Detection phases
+        if (statStatus) {
+          if (currentPct < 40) statStatus.textContent = 'SEARCHING';
+          else if (currentPct < 85) statStatus.textContent = 'LOCKING';
+          else statStatus.textContent = 'SYNCING';
+        }
+
+        if (currentPct >= 100) {
+          clearInterval(detectInterval);
+
+          // Full Harmonic Lock Achieved
+          try {
+            window.BOTU.sound.playLockSound();
+          } catch (e) {}
+
+          if (pill) {
+            pill.classList.add('verified');
+            if (pillText) pillText.textContent = '✓ HARMONIC LOCK ACHIEVED • TOKEN COMPATIBLE';
+          }
+          if (hudStatus) hudStatus.textContent = 'RECEPTACLE // TOKEN DETECTED';
+          if (hudDot) hudDot.classList.add('online');
+
+          if (statYield) statYield.textContent = '500 MEGA-CORES';
+          if (statHarmonic) statHarmonic.textContent = '99.98%';
+          if (statStatus) {
+            statStatus.textContent = 'AUTHENTICATED';
+            statStatus.style.color = 'var(--neon-emerald)';
+          }
+
+          // Sparks burst
+          if (window.BOTU.particleEngine && tokenWrap) {
+            const rect = tokenWrap.getBoundingClientRect();
+            window.BOTU.particleEngine.emitChargingSparks(rect.left + rect.width / 2, rect.top + rect.height / 2);
+          }
+
+          // Unlock Continue Button
+          if (continueBtn) {
+            continueBtn.disabled = false;
+            continueBtn.classList.add('btn-pulse');
+            continueBtn.innerHTML = '<span>CONTINUE TO REACTOR PREP</span> <span>▶</span>';
+          }
+        }
+      }, 80);
+
+      if (continueBtn) {
+        continueBtn.addEventListener('click', () => {
+          window.BOTU.navigator.navigateTo('energy-preparation.html');
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startTokenDetectionSequence);
+    } else {
+      startTokenDetectionSequence();
+    }
+  </script>
+</body>
+</html>

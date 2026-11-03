@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>B.O.T.U. – Token Loading | Quantum Token Recharge</title>
+
+  <!-- Elite Futuristic Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cyber Background Elements -->
+  <div class="cyber-bg">
+    <div class="cyber-grid"></div>
+    <div class="cyber-vignette"></div>
+    <div class="cyber-cosmic-glow"></div>
+  </div>
+
+  <!-- Realtime Laser Scanline Beam -->
+  <div class="scan-line"></div>
+
+  <!-- Dynamic Screen Flash on 100% Impact -->
+  <div class="screen-flash" id="screen-flash"></div>
+
+  <!-- Transition Portal Overlay -->
+  <div class="transition-overlay" id="transition-overlay">
+    <div class="transition-portal">
+      <span class="transition-portal-text">WARPING...</span>
+    </div>
+  </div>
+
+  <!-- Particles Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Zero-Scroll Main Viewport -->
+  <div class="page-container">
+    <div class="page-content page-enter">
+
+      <!-- Header & Step Tracker -->
+      <header class="page-header">
+        <div class="mission-hud-bar">
+          <div class="hud-left">
+            <div class="hud-pill">
+              <div class="hud-pulse-dot" id="hud-dot"></div>
+              <span id="hud-status">TRANSFER // INJECTING TOKEN</span>
+            </div>
+            <div class="hud-oscilloscope" aria-hidden="true">
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+              <span class="osc-bar"></span>
+            </div>
+          </div>
+          <div class="hud-right">
+            <div class="hud-telemetry-tag">
+              <span>NODE:</span>
+              <span class="tag-badge">OMEGA-7</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-header">
+          <div class="brand-eyebrow">
+            <span>⚡</span> QUANTUM INJECTION <span>⚡</span>
+          </div>
+          <h1 class="brand-title">TOKEN LOADING</h1>
+          <p class="brand-subtitle">Channeling Plasma Stream into B.O.T.U. Arc Reactor</p>
+        </div>
+
+        <!-- 6-Phase Step Tracker -->
+        <nav class="step-stepper" aria-label="Recharge Progress">
+          <div class="step-item completed">
+            <div class="step-bar"></div>
+            <span class="step-label">01 BOOT</span>
+          </div>
+          <div class="step-item completed">
+            <div class="step-bar"></div>
+            <span class="step-label">02 VERIFY</span>
+          </div>
+          <div class="step-item completed">
+            <div class="step-bar"></div>
+            <span class="step-label">03 TOKEN</span>
+          </div>
+          <div class="step-item completed">
+            <div class="step-bar"></div>
+            <span class="step-label">04 REACTOR</span>
+          </div>
+          <div class="step-item active">
+            <div class="step-bar"></div>
+            <span class="step-label">05 INJECT</span>
+          </div>
+          <div class="step-item">
+            <div class="step-bar"></div>
+            <span class="step-label">06 ONLINE</span>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Center Charging Robot Stage Card -->
+      <main class="robot-stage-card">
+        <div class="corner-bracket corner-tl"></div>
+        <div class="corner-bracket corner-tr"></div>
+        <div class="corner-bracket corner-bl"></div>
+        <div class="corner-bracket corner-br"></div>
+
+        <!-- Upper Energy Emitter Node -->
+        <div class="energy-emitter">
+          <div class="emitter-core"></div>
+        </div>
+
+        <!-- Plasma Stream Beam & Traveling Quantum Token -->
+        <div class="energy-beam-container">
+          <div class="energy-beam active" id="energy-beam"></div>
+
+          <!-- Traveling Quantum Token -->
+          <div class="traveling-token-wrap" id="traveling-token">
+            <div class="traveling-token-ring"></div>
+            <svg class="traveling-token-svg" viewBox="0 0 100 100" fill="none">
+              <defs>
+                <radialGradient id="tokenLoadGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffffff" />
+                  <stop offset="45%" stop-color="#00f0ff" />
+                  <stop offset="85%" stop-color="#ffb703" />
+                  <stop offset="100%" stop-color="#d62828" />
+                </radialGradient>
+              </defs>
+              <circle cx="50" cy="50" r="44" fill="url(#tokenLoadGrad)" stroke="#00f0ff" stroke-width="3" filter="drop-shadow(0 0 8px #00f0ff)" />
+              <polygon points="50,16 80,34 80,66 50,84 20,66 20,34" fill="#060b18" stroke="#ffb703" stroke-width="2" />
+              <!-- B.O.T.U. Crest Horns Emblem -->
+              <path d="M38 38 C32 30, 20 26, 14 28 C10 29, 11 34, 16 35 C24 37, 32 43, 36 48 Z" fill="#00f0ff" />
+              <path d="M62 38 C68 30, 80 26, 86 28 C90 29, 89 34, 84 35 C76 37, 68 43, 64 48 Z" fill="#00f0ff" />
+              <circle cx="50" cy="50" r="10" fill="#ffffff" />
+              <circle cx="50" cy="50" r="5" fill="#00f0ff" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Visual Stage with B.O.T.U. Mecha -->
+        <div class="stage-visual">
+          <div class="robot-figure-wrap">
+            <div class="robot-aura"></div>
+            <div class="shockwave-ring" id="shockwave-ring"></div>
+
+            <!-- Complete B.O.T.U. Vector Mecha Artwork -->
+            <svg class="robot-svg" viewBox="0 0 320 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <filter id="cyanGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="6" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <filter id="coreGlow" x="-40%" y="-40%" width="180%" height="180%">
+                  <feGaussianBlur stdDeviation="12" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <filter id="hornGlow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="7" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+
+                <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#1e293b" />
+                  <stop offset="50%" stop-color="#0f172a" />
+                  <stop offset="100%" stop-color="#070b14" />
+                </linearGradient>
+
+                <linearGradient id="armorHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6" />
+                  <stop offset="100%" stop-color="#0284c7" stop-opacity="0.1" />
+                </linearGradient>
+
+                <linearGradient id="hornGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#0284c7" />
+                  <stop offset="50%" stop-color="#00f0ff" />
+                  <stop offset="100%" stop-color="#c084fc" />
+                </linearGradient>
+
+                <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#0077ff" />
+                  <stop offset="100%" stop-color="#00f0ff" />
+                </linearGradient>
+
+                <radialGradient id="arcCoreGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffffff" />
+                  <stop offset="35%" stop-color="#00f0ff" />
+                  <stop offset="70%" stop-color="#0055ff" stop-opacity="0.85" />
+                  <stop offset="100%" stop-color="#001844" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+
+              <!-- COSMIC MECHA HORNS -->
+              <g id="mecha-horns">
+                <path class="mecha-horn" d="M102 75 C82 50, 48 38, 28 44 C20 46, 22 56, 32 58 C55 62, 78 78, 92 92 Z" 
+                      fill="url(#hornGradient)" stroke="#00f0ff" stroke-width="2" filter="url(#hornGlow)" />
+                <path class="mecha-horn" d="M218 75 C238 50, 272 38, 292 44 C300 46, 298 56, 288 58 C265 62, 242 78, 228 92 Z" 
+                      fill="url(#hornGradient)" stroke="#00f0ff" stroke-width="2" filter="url(#hornGlow)" />
+              </g>
+
+              <!-- Thruster Flame -->
+              <g id="thruster-flame">
+                <polygon points="142,300 178,300 160,338" fill="url(#neonGradient)" opacity="0.85" filter="url(#cyanGlow)" />
+                <polygon points="148,300 172,300 160,326" fill="#ffffff" opacity="0.95" />
+              </g>
+
+              <!-- Robot Torso Chassis -->
+              <g id="robot-torso">
+                <path d="M125 260 L195 260 L180 295 L140 295 Z" fill="#0f172a" stroke="#00f0ff" stroke-width="1.8" />
+                <polygon points="90,150 230,150 215,260 105,260" fill="url(#bodyGradient)" stroke="#38bdf8" stroke-width="2" />
+                <polygon points="95,155 130,155 125,230 105,230" fill="url(#armorHighlight)" />
+                <polygon points="225,155 190,155 195,230 215,230" fill="url(#armorHighlight)" />
+                <line x1="110" y1="180" x2="135" y2="180" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="3 2" />
+                <line x1="185" y1="180" x2="210" y2="180" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="3 2" />
+              </g>
+
+              <!-- Robot Arms -->
+              <g id="robot-arms">
+                <circle cx="75" cy="165" r="18" fill="#1e293b" stroke="#00f0ff" stroke-width="2" />
+                <polygon points="56,155 76,145 76,165" fill="#00f0ff" opacity="0.6" />
+                <path d="M68 180 L60 230 L76 235 L80 180 Z" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+                <circle cx="68" cy="240" r="10" fill="#1e293b" stroke="#00f0ff" stroke-width="1.5" />
+                <line x1="68" y1="190" x2="68" y2="225" stroke="#00f0ff" stroke-width="2" />
+
+                <circle cx="245" cy="165" r="18" fill="#1e293b" stroke="#00f0ff" stroke-width="2" />
+                <polygon points="264,155 244,145 244,165" fill="#00f0ff" opacity="0.6" />
+                <path d="M252 180 L260 230 L244 235 L240 180 Z" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+                <circle cx="252" cy="240" r="10" fill="#1e293b" stroke="#00f0ff" stroke-width="1.5" />
+                <line x1="252" y1="190" x2="252" y2="225" stroke="#00f0ff" stroke-width="2" />
+              </g>
+
+              <!-- ARC REACTOR / QUANTUM ENERGY CORE -->
+              <g id="robot-energy-core" transform="translate(160, 205)">
+                <circle cx="0" cy="0" r="42" fill="#030712" stroke="#38bdf8" stroke-width="3" />
+                <g class="robot-core-outer" id="robot-core-outer">
+                  <circle cx="0" cy="0" r="36" fill="none" stroke="#00f0ff" stroke-width="3.2" stroke-dasharray="14 6" opacity="0.9" />
+                  <circle cx="0" cy="0" r="32" fill="none" stroke="#9d4edd" stroke-width="1.8" stroke-dasharray="6 12" />
+                </g>
+                <circle class="robot-core-orb" cx="0" cy="0" r="18" fill="url(#arcCoreGrad)" filter="url(#coreGlow)" id="robot-core-glow" />
+                <circle cx="0" cy="0" r="8" fill="#ffffff" filter="url(#cyanGlow)" />
+              </g>
+
+              <!-- Neck Assembly -->
+              <rect x="145" y="125" width="30" height="25" rx="3" fill="#334155" stroke="#00f0ff" stroke-width="1.5" />
+              <line x1="145" y1="133" x2="175" y2="133" stroke="#00f0ff" stroke-width="1" />
+              <line x1="145" y1="141" x2="175" y2="141" stroke="#00f0ff" stroke-width="1" />
+
+              <!-- Robot Head & Visor -->
+              <g id="robot-head">
+                <rect x="75" y="65" width="12" height="40" rx="4" fill="#1e293b" stroke="#00f0ff" stroke-width="1.5" />
+                <line x1="81" y1="65" x2="81" y2="35" stroke="#00f0ff" stroke-width="2" />
+                <circle cx="81" cy="33" r="5" fill="#9d4edd" filter="url(#cyanGlow)" />
+
+                <rect x="233" y="65" width="12" height="40" rx="4" fill="#1e293b" stroke="#00f0ff" stroke-width="1.5" />
+                <line x1="239" y1="65" x2="239" y2="35" stroke="#00f0ff" stroke-width="2" />
+                <circle cx="239" cy="33" r="5" fill="#9d4edd" filter="url(#cyanGlow)" />
+
+                <path d="M85 85 C85 45, 235 45, 235 85 L230 130 C230 142, 215 148, 160 148 C105 148, 90 142, 90 130 Z" 
+                      fill="url(#bodyGradient)" stroke="#00f0ff" stroke-width="2.5" />
+
+                <polygon points="160,50 174,58 174,74 160,82 146,74 146,58" fill="#0f172a" stroke="#00f0ff" stroke-width="1.8" />
+                <polygon points="160,56 168,61 168,71 160,76 152,71 152,61" fill="#00f0ff" opacity="0.85" />
+
+                <path d="M102 85 C102 78, 218 78, 218 85 L214 122 C214 128, 195 132, 160 132 C125 132, 106 128, 106 122 Z" 
+                      fill="#030712" stroke="#38bdf8" stroke-width="2" />
+
+                <!-- Visor Eyes -->
+                <g id="robot-eyes">
+                  <rect class="robot-visor-eye" x="122" y="98" width="28" height="12" rx="4" fill="#00f0ff" />
+                  <rect class="robot-visor-eye" x="170" y="98" width="28" height="12" rx="4" fill="#00f0ff" />
+                  <circle cx="136" cy="104" r="3" fill="#ffffff" />
+                  <circle cx="184" cy="104" r="3" fill="#ffffff" />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Live Charge Readout & Telemetry HUD -->
+        <div class="charge-stats-card">
+          <div class="stat-header-row">
+            <div class="stat-label-col">
+              <span class="stat-label-sub">ENERGY CONVERSION</span>
+              <span class="stat-label-main">QUANTUM FLUX LINK</span>
+            </div>
+            <div class="energy-percent-display">
+              <span id="energy-percent">0</span><span class="energy-percent-unit">%</span>
+            </div>
+          </div>
+
+          <div class="progress-bar-container">
+            <div class="progress-track">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="telemetry-grid">
+            <div class="telemetry-item">
+              <span class="telemetry-key">VOLTAGE</span>
+              <span class="telemetry-val" id="stat-voltage">12.4 V</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-key">CORE FLUX</span>
+              <span class="telemetry-val" id="stat-flux">180 FLX</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-key">CAPACITY</span>
+              <span class="telemetry-val" id="stat-capacity">0.1 kW/h</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Status Footer (No Button - Auto-Redirects at 100%) -->
+      <footer class="page-footer">
+        <div class="transfer-status-indicator" id="transfer-status-indicator">
+          <span class="status-pulse-dot"></span>
+          <span id="transfer-status-label">TRANSFERRING QUANTUM ENERGY...</span>
+        </div>
+        <div class="footer-info">
+          <span>B.O.T.U. (BHAINS OF THE UNIVERSE) • QUANTUM EVENT TERMINAL</span>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="botu-core.js"></script>
+  <script>
+    function startTokenLoadingSequence() {
+      const energyPercent = document.getElementById('energy-percent');
+      const progressFill = document.getElementById('progress-fill');
+      const statusIndicator = document.getElementById('transfer-status-indicator');
+      const statusLabel = document.getElementById('transfer-status-label');
+      const statVoltage = document.getElementById('stat-voltage');
+      const statFlux = document.getElementById('stat-flux');
+      const statCapacity = document.getElementById('stat-capacity');
+      const hudStatus = document.getElementById('hud-status');
+      const hudDot = document.getElementById('hud-dot');
+      const screenFlash = document.getElementById('screen-flash');
+      const shockwave = document.getElementById('shockwave-ring');
+      const beam = document.getElementById('energy-beam');
+      const travelingToken = document.getElementById('traveling-token');
+      const coreGlow = document.getElementById('robot-core-glow');
+      const robotEyes = document.querySelectorAll('.robot-visor-eye');
+      const mechaHorns = document.querySelectorAll('.mecha-horn');
+
+      // Start audio safely
+      try {
+        window.BOTU.sound.ensureContext();
+        window.BOTU.sound.startChargingHum();
+      } catch (e) {
+        console.warn('Audio start error:', e);
+      }
+
+      const duration = 8000; // 8.0 seconds cinematic transfer duration
+      let startTime = null;
+      let lastSparkTime = 0;
+      let isDone = false;
+
+      const getCoreCoordinates = () => {
+        const core = document.getElementById('robot-core-outer');
+        if (core) {
+          const rect = core.getBoundingClientRect();
+          return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+        }
+        return { x: window.innerWidth / 2, y: window.innerHeight * 0.45 };
+      };
+
+      function updateCharge(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const rawProgress = Math.min(Math.max(elapsed / duration, 0), 1);
+        const eased = Math.sin((rawProgress * Math.PI) / 2);
+        const currentPercent = Math.min(100, Math.floor(eased * 100));
+
+        // 1. Numerical & Progress Bar Animation
+        if (energyPercent) energyPercent.textContent = currentPercent;
+        if (progressFill) progressFill.style.width = currentPercent + '%';
+
+        // 2. HUD & Status Indicator Display (percentage displayed exclusively in the gauge above)
+        if (!isDone) {
+          if (hudStatus) hudStatus.textContent = 'TRANSFER // INJECTING TOKEN';
+          if (statusLabel) statusLabel.textContent = 'TRANSFERRING QUANTUM ENERGY...';
+        }
+
+        // 3. Audio pitch modulation
+        try {
+          window.BOTU.sound.updateChargingHum(eased);
+        } catch (e) {}
+
+        // 4. Traveling Token Position along the Beam (travels from 0% down to 82% where chest core is)
+        if (travelingToken) {
+          const travelTopPercent = Math.min(eased * 82, 82);
+          travelingToken.style.top = travelTopPercent + '%';
+
+          // When reaching chest core (>80%), absorb into the reactor
+          if (rawProgress > 0.82) {
+            const absorbRatio = (rawProgress - 0.82) / 0.18;
+            travelingToken.style.opacity = Math.max(0, 1 - absorbRatio * 1.2).toFixed(2);
+            travelingToken.style.transform = `translate(-50%, -50%) scale(${1 + absorbRatio * 0.6})`;
+          } else {
+            travelingToken.style.opacity = '1';
+            travelingToken.style.transform = 'translate(-50%, -50%) scale(1)';
+          }
+        }
+
+        // 5. Telemetry values animation
+        const v = (12.4 + eased * 467.6).toFixed(1);
+        const f = Math.floor(18 + eased * 82);
+        const c = (0.1 + eased * 24.9).toFixed(1);
+
+        if (statVoltage) statVoltage.textContent = v + ' V';
+        if (statFlux) statFlux.textContent = (f * 10) + ' FLX';
+        if (statCapacity) statCapacity.textContent = c + ' kW/h';
+
+        // 6. Visual intensity escalation
+        if (coreGlow) {
+          coreGlow.style.opacity = (0.4 + eased * 0.6).toFixed(2);
+        }
+        robotEyes.forEach(eye => {
+          eye.style.filter = `drop-shadow(0 0 ${6 + eased * 20}px #00f0ff)`;
+        });
+        mechaHorns.forEach(horn => {
+          horn.style.filter = `drop-shadow(0 0 ${4 + eased * 14}px #00f0ff)`;
+        });
+
+        // 7. Emit spark particles towards the chest core
+        if (timestamp - lastSparkTime > 100 && rawProgress < 0.98) {
+          lastSparkTime = timestamp;
+          const pos = getCoreCoordinates();
+          if (window.BOTU.particleEngine) {
+            window.BOTU.particleEngine.emitChargingSparks(pos.x, pos.y);
+          }
+          if (Math.random() > 0.35) {
+            try {
+              window.BOTU.sound.playSparkCrackle();
+            } catch (e) {}
+          }
+        }
+
+        if (rawProgress < 1) {
+          requestAnimationFrame(updateCharge);
+        } else {
+          // 100% Impact & Full Energy Explosion
+          isDone = true;
+          try {
+            window.BOTU.sound.stopChargingHum();
+          } catch (e) {}
+
+          if (energyPercent) energyPercent.textContent = '100';
+          if (progressFill) progressFill.style.width = '100%';
+          if (statVoltage) statVoltage.textContent = '480.0 V';
+          if (statFlux) statFlux.textContent = '1000 FLX';
+          if (statCapacity) statCapacity.textContent = '25.0 kW/h';
+
+          // Trigger Screen Flash & Shockwave
+          if (screenFlash) screenFlash.classList.add('flash-active');
+          if (shockwave) shockwave.classList.add('animate');
+
+          try {
+            window.BOTU.sound.playCompletionSound();
+            setTimeout(() => {
+              window.BOTU.sound.playCelebrationFanfare();
+            }, 180);
+          } catch (e) {}
+
+          if (beam) beam.classList.remove('active');
+          if (travelingToken) travelingToken.style.opacity = '0';
+          if (hudStatus) hudStatus.textContent = 'RESTORED // 100% POWER';
+          if (hudDot) hudDot.classList.add('online');
+
+          // Highlight Status Indicator to Complete
+          if (statusIndicator) {
+            statusIndicator.classList.add('complete');
+          }
+          if (statusLabel) {
+            statusLabel.textContent = '✓ QUANTUM INJECTION COMPLETE • REDIRECTING...';
+          }
+
+          // AUTO REDIRECT TO CONGRATULATIONS PAGE
+          setTimeout(() => {
+            window.BOTU.navigator.navigateTo('congratulations.html', 400);
+          }, 850);
+        }
+      }
+
+      requestAnimationFrame(updateCharge);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startTokenLoadingSequence);
+    } else {
+      startTokenLoadingSequence();
+    }
+  </script>
+</body>
+</html>

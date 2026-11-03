@@ -1,0 +1,1472 @@
+/* ===================================================================
+   B.O.T.U. (Bhains of the Universe) - Quantum Token Recharge Station
+   Universal Cyberpunk Stylesheet - Zero Scrollbar Viewport Architecture
+   =================================================================== */
+
+:root {
+  /* Cyberpunk Neon Palette */
+  --bg-deep: #02040a;
+  --bg-dark: #060b18;
+  --bg-panel: rgba(8, 16, 36, 0.82);
+  --bg-panel-light: rgba(15, 23, 42, 0.65);
+  --panel-border: rgba(0, 240, 255, 0.28);
+  --panel-border-bright: rgba(0, 240, 255, 0.75);
+
+  --neon-cyan: #00f0ff;
+  --neon-cyan-glow: rgba(0, 240, 255, 0.75);
+  --neon-blue: #0077ff;
+  --neon-purple: #9d4edd;
+  --neon-purple-glow: rgba(157, 78, 221, 0.65);
+  --neon-emerald: #00f59b;
+  --neon-emerald-glow: rgba(0, 245, 155, 0.6);
+  --neon-gold: #ffb703;
+  --neon-gold-glow: rgba(255, 183, 3, 0.65);
+  --neon-crimson: #ff0055;
+
+  --text-white: #ffffff;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-cyan: #38bdf8;
+  --text-muted: #64748b;
+
+  --font-display: 'Orbitron', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Share Tech Mono', Consolas, 'Courier New', monospace;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Base Strict Zero-Scroll Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  background-color: var(--bg-deep);
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Master Viewport Container */
+.page-container {
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.page-content {
+  width: 100%;
+  max-width: 1100px;
+  height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-top: max(8px, env(safe-area-inset-top));
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  padding-left: max(10px, env(safe-area-inset-left));
+  padding-right: max(10px, env(safe-area-inset-right));
+
+  gap: clamp(4px, 1.2vh, 12px);
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Page Entrance / Exit Transitions */
+.page-enter {
+  animation: pageFadeIn 0.35s var(--ease-expo) forwards;
+}
+
+.page-exit {
+  animation: pageFadeOut 0.3s var(--ease-expo) forwards;
+  pointer-events: none;
+}
+
+@keyframes pageFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pageFadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.03) translateY(-10px);
+  }
+}
+
+/* Smooth Navigation Transition Overlay */
+.transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(0, 240, 255, 0.15) 0%, rgba(2, 4, 10, 0.96) 80%);
+  transition: opacity 0.25s ease;
+}
+
+.transition-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.transition-portal {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid var(--neon-cyan);
+  box-shadow: 0 0 35px var(--neon-cyan), inset 0 0 30px var(--neon-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: portalPulse 0.6s infinite alternate ease-in-out;
+  position: relative;
+}
+
+.transition-portal::before {
+  content: '';
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px dashed var(--neon-purple);
+  animation: spinCW 2s linear infinite;
+}
+
+.transition-portal-text {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--neon-cyan);
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px var(--neon-cyan);
+}
+
+@keyframes portalPulse {
+  0% { transform: scale(0.85); box-shadow: 0 0 20px var(--neon-cyan); }
+  100% { transform: scale(1.25); box-shadow: 0 0 50px var(--neon-cyan), 0 0 80px var(--neon-purple); }
+}
+
+@keyframes spinCW {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spinCCW {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+/* Background Cyber Grid & Cosmic Glow */
+.cyber-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.cyber-grid {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
+  transform: perspective(450px) rotateX(55deg);
+  animation: gridDrive 16s linear infinite;
+  opacity: 0.55;
+}
+
+@keyframes gridDrive {
+  0% { transform: perspective(450px) rotateX(55deg) translateY(0); }
+  100% { transform: perspective(450px) rotateX(55deg) translateY(36px); }
+}
+
+.cyber-vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 30%, transparent 15%, rgba(2, 4, 10, 0.88) 75%, var(--bg-deep) 100%);
+}
+
+.cyber-cosmic-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  max-width: 90vw;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.18) 0%, rgba(157, 78, 221, 0.08) 45%, transparent 70%);
+  filter: blur(40px);
+  border-radius: 50%;
+  animation: cosmicPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes cosmicPulse {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.65; }
+  100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.95; }
+}
+
+/* Realtime Laser Scanline Beam */
+.scan-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  box-shadow: 0 0 16px var(--neon-cyan);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 100;
+  animation: scanLaser 4s ease-in-out infinite;
+}
+
+@keyframes scanLaser {
+  0% { top: 0; opacity: 0; }
+  15% { opacity: 0.45; }
+  85% { opacity: 0.45; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Dynamic Screen Flash on 100% Impact */
+.screen-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: radial-gradient(circle, #ffffff 0%, rgba(0, 240, 255, 0.8) 40%, rgba(2, 4, 10, 0.95) 100%);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.05s ease-out;
+}
+
+.screen-flash.flash-active {
+  opacity: 0.95;
+  transition: none;
+  animation: flashDecay 0.85s var(--ease-expo) forwards;
+}
+
+@keyframes flashDecay {
+  0% { opacity: 0.95; }
+  100% { opacity: 0; }
+}
+
+/* Fullscreen Particle / Confetti Canvas */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* ===================================================================
+   HEADER & MISSION HUD BAR
+   =================================================================== */
+.page-header {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 0.8vh, 8px);
+}
+
+.mission-hud-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(6, 11, 24, 0.78);
+  border: 1px solid var(--panel-border);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-family: var(--font-mono);
+  font-size: clamp(9px, 2.3vw, 11.5px);
+  letter-spacing: 0.8px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.hud-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--neon-cyan);
+  min-width: 0;
+}
+
+.hud-pill span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hud-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan);
+  animation: ledPulse 1.4s infinite alternate;
+  flex-shrink: 0;
+}
+
+.hud-pulse-dot.online {
+  background-color: var(--neon-emerald);
+  box-shadow: 0 0 10px var(--neon-emerald);
+}
+
+.hud-pulse-dot.warning {
+  background-color: var(--neon-gold);
+  box-shadow: 0 0 8px var(--neon-gold);
+}
+
+@keyframes ledPulse {
+  0% { opacity: 0.35; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1.15); }
+}
+
+.hud-oscilloscope {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.osc-bar {
+  width: 2px;
+  height: 4px;
+  background-color: var(--neon-cyan);
+  border-radius: 1px;
+  transition: height 0.08s ease;
+  box-shadow: 0 0 4px var(--neon-cyan);
+}
+
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.hud-sound-toggle {
+  display: none !important;
+}
+
+.hud-telemetry-tag {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.tag-badge {
+  color: var(--neon-purple);
+  font-weight: 700;
+}
+
+/* ===================================================================
+   STEP PROGRESS STEPPER (PHASES 1 to 6)
+   =================================================================== */
+.step-stepper {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+  gap: 4px;
+}
+
+.step-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  position: relative;
+  min-width: 0;
+}
+
+.step-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.step-item.completed .step-bar {
+  background: var(--neon-emerald);
+  box-shadow: 0 0 6px var(--neon-emerald);
+}
+
+.step-item.active .step-bar {
+  background: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan);
+  animation: activeStepPulse 1.2s infinite alternate;
+}
+
+@keyframes activeStepPulse {
+  0% { box-shadow: 0 0 4px var(--neon-cyan); opacity: 0.8; }
+  100% { box-shadow: 0 0 10px var(--neon-cyan); opacity: 1; }
+}
+
+.step-label {
+  font-family: var(--font-mono);
+  font-size: clamp(7.5px, 1.7vw, 9.5px);
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.step-item.completed .step-label {
+  color: var(--neon-emerald);
+}
+
+.step-item.active .step-label {
+  color: var(--neon-cyan);
+  font-weight: 700;
+}
+
+/* ===================================================================
+   BRAND & PAGE HEADINGS
+   =================================================================== */
+.brand-header {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.brand-eyebrow {
+  font-family: var(--font-mono);
+  font-size: clamp(8.5px, 2vw, 11px);
+  letter-spacing: clamp(1px, 0.6vw, 2px);
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px var(--neon-cyan-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.brand-title {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 4.2vw, 28px);
+  font-weight: 900;
+  letter-spacing: clamp(1.2px, 0.6vw, 2.5px);
+  background: linear-gradient(180deg, #ffffff 15%, var(--neon-cyan) 65%, #0077ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4));
+  line-height: 1.15;
+  margin: 1px 0;
+}
+
+.brand-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(10.5px, 2.3vw, 13px);
+  color: var(--text-secondary);
+  letter-spacing: 0.8px;
+}
+
+/* ===================================================================
+   MASTER VISUAL STAGE CARD
+   =================================================================== */
+.robot-stage-card {
+  width: 100%;
+  max-width: 580px;
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  background: var(--bg-panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.65), inset 0 0 20px rgba(0, 240, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  padding: clamp(4px, 1vh, 10px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Futuristic Corner Brackets */
+.corner-bracket {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--neon-cyan);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.corner-tl { top: 3px; left: 3px; border-right: none; border-bottom: none; }
+.corner-tr { top: 3px; right: 3px; border-left: none; border-bottom: none; }
+.corner-bl { bottom: 3px; left: 3px; border-right: none; border-top: none; }
+.corner-br { bottom: 3px; right: 3px; border-left: none; border-top: none; }
+
+/* Visual Stage Area for Robot / Hologram */
+.stage-visual {
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Robot Figure Wrapper */
+.robot-figure-wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: robotFloat 3.8s ease-in-out infinite alternate;
+}
+
+@keyframes robotFloat {
+  0% { transform: translateY(-3px); }
+  100% { transform: translateY(3px); }
+}
+
+.robot-svg {
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 14px rgba(0, 240, 255, 0.28));
+}
+
+/* Ambient Aura Rings */
+.robot-aura {
+  position: absolute;
+  width: clamp(130px, 42vw, 220px);
+  height: clamp(130px, 42vw, 220px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, rgba(157, 78, 221, 0.05) 50%, transparent 70%);
+  filter: blur(14px);
+  pointer-events: none;
+  animation: auraPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes auraPulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 0.95; }
+}
+
+.shockwave-ring {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid var(--neon-cyan);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shockwave-ring.animate {
+  animation: shockwaveExpand 0.75s var(--ease-expo) forwards;
+}
+
+@keyframes shockwaveExpand {
+  0% { transform: scale(0.2); opacity: 1; border-width: 5px; }
+  100% { transform: scale(5.5); opacity: 0; border-width: 1px; }
+}
+
+/* Upper Energy Emitter Node */
+.energy-emitter {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 9px;
+  background: #0f172a;
+  border: 1.5px solid var(--neon-cyan);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px var(--neon-cyan);
+  z-index: 5;
+}
+
+.emitter-core {
+  width: 10px;
+  height: 3px;
+  background: #ffffff;
+  box-shadow: 0 0 10px var(--neon-cyan);
+  border-radius: 2px;
+}
+
+/* Plasma Stream Beam */
+.energy-beam-container {
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: calc(100% - 90px);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.energy-beam {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #ffffff 0%, var(--neon-cyan) 35%, rgba(0, 119, 255, 0.4) 85%, transparent 100%);
+  box-shadow: 0 0 18px var(--neon-cyan);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  transform-origin: top;
+}
+
+.energy-beam.active {
+  opacity: 0.95;
+  animation: beamFlicker 0.12s infinite alternate;
+}
+
+/* Traveling Quantum Token along Beam */
+.traveling-token-wrap {
+  position: absolute;
+  left: 50%;
+  top: 2%;
+  transform: translate(-50%, -50%);
+  width: clamp(38px, 9vw, 50px);
+  height: clamp(38px, 9vw, 50px);
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 16px var(--neon-cyan));
+  will-change: top, transform, opacity;
+}
+
+.traveling-token-ring {
+  position: absolute;
+  width: 125%;
+  height: 125%;
+  border-radius: 50%;
+  border: 2px dashed var(--neon-cyan);
+  animation: spinCW 1.2s linear infinite;
+}
+
+.traveling-token-svg {
+  width: 100%;
+  height: 100%;
+  animation: tokenPulseGlow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes tokenPulseGlow {
+  0% { transform: scale(0.92); filter: drop-shadow(0 0 6px var(--neon-cyan)); }
+  100% { transform: scale(1.08); filter: drop-shadow(0 0 16px var(--neon-gold)), drop-shadow(0 0 24px var(--neon-cyan)); }
+}
+
+@keyframes beamFlicker {
+  0% { transform: scaleX(0.85); opacity: 0.85; filter: drop-shadow(0 0 8px var(--neon-cyan)); }
+  100% { transform: scaleX(1.15); opacity: 1; filter: drop-shadow(0 0 18px #ffffff); }
+}
+
+/* ===================================================================
+   TELEMETRY & CHARGE STATS CARD
+   =================================================================== */
+.charge-stats-card {
+  width: 100%;
+  background: rgba(3, 7, 18, 0.72);
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  border-radius: 8px;
+  padding: clamp(3px, 0.8vh, 6px) clamp(6px, 1.8vw, 10px);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stat-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-label-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label-sub {
+  font-family: var(--font-mono);
+  font-size: clamp(7.5px, 1.7vw, 9.5px);
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+}
+
+.stat-label-main {
+  font-family: var(--font-display);
+  font-size: clamp(9.5px, 2.1vw, 11.5px);
+  color: var(--neon-cyan);
+  letter-spacing: 0.6px;
+  font-weight: 700;
+}
+
+.energy-percent-display {
+  font-family: var(--font-display);
+  font-size: clamp(15px, 3.8vw, 22px);
+  font-weight: 900;
+  color: var(--text-white);
+  text-shadow: 0 0 10px var(--neon-cyan);
+  line-height: 1;
+}
+
+.energy-percent-unit {
+  font-size: clamp(9.5px, 2.3vw, 13px);
+  color: var(--neon-cyan);
+  margin-left: 2px;
+}
+
+/* Compact Progress Track */
+.progress-bar-container {
+  width: 100%;
+}
+
+.progress-track {
+  width: 100%;
+  height: clamp(5px, 1vh, 7px);
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #0077ff 0%, var(--neon-cyan) 60%, #ffffff 100%);
+  box-shadow: 0 0 10px var(--neon-cyan);
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  padding-top: 1px;
+}
+
+.telemetry-item {
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 23, 42, 0.5);
+  padding: 2px 5px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.telemetry-key {
+  font-family: var(--font-mono);
+  font-size: clamp(7px, 1.5vw, 8.5px);
+  color: var(--text-muted);
+  letter-spacing: 0.4px;
+}
+
+.telemetry-val {
+  font-family: var(--font-mono);
+  font-size: clamp(8.5px, 1.9vw, 10.5px);
+  color: var(--text-white);
+  font-weight: 600;
+}
+
+/* ===================================================================
+   PRIMARY ACTIONS & BUTTONS
+   =================================================================== */
+.page-footer {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2px, 0.6vh, 5px);
+}
+
+.primary-btn {
+  width: min(92%, 360px);
+  min-height: 42px;
+  height: clamp(42px, 6vh, 50px);
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.18) 0%, rgba(0, 119, 255, 0.35) 100%);
+  border: 1.5px solid var(--neon-cyan);
+  border-radius: 999px;
+  color: var(--text-white);
+  font-family: var(--font-display);
+  font-size: clamp(11.5px, 3vw, 14.5px);
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.2);
+  transition: all 0.25s var(--ease-expo);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.primary-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 65%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.primary-btn:hover:not(:disabled)::after {
+  transform: translateX(100%);
+}
+
+.primary-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.35) 0%, rgba(0, 119, 255, 0.55) 100%);
+  border-color: #ffffff;
+  box-shadow: 0 0 26px rgba(0, 240, 255, 0.7), inset 0 0 14px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.primary-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.primary-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  border-color: var(--text-muted);
+  box-shadow: none;
+}
+
+.primary-btn.btn-pulse {
+  animation: btnGlowPulse 1.8s infinite alternate;
+}
+
+@keyframes btnGlowPulse {
+  0% { box-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
+  100% { box-shadow: 0 0 24px rgba(0, 240, 255, 0.85), 0 0 40px rgba(0, 119, 255, 0.5); }
+}
+
+/* Transfer Status Indicator (Auto-Redirect at 100%) */
+.transfer-status-indicator {
+  width: min(92%, 360px);
+  min-height: 42px;
+  height: clamp(42px, 6vh, 50px);
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background: rgba(6, 11, 24, 0.78);
+  border: 1.5px solid var(--panel-border-bright);
+  border-radius: 999px;
+  color: var(--neon-cyan);
+  font-family: var(--font-display);
+  font-size: clamp(11px, 2.8vw, 13.5px);
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.25), inset 0 0 10px rgba(0, 240, 255, 0.1);
+  text-align: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.transfer-status-indicator.complete {
+  border-color: var(--neon-emerald);
+  color: var(--neon-emerald);
+  box-shadow: 0 0 24px var(--neon-emerald-glow), inset 0 0 14px rgba(0, 245, 155, 0.2);
+  animation: completePulse 0.9s infinite alternate;
+}
+
+.status-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--neon-cyan);
+  box-shadow: 0 0 10px var(--neon-cyan);
+  animation: ledPulse 1.2s infinite alternate;
+  flex-shrink: 0;
+}
+
+.transfer-status-indicator.complete .status-pulse-dot {
+  background-color: var(--neon-emerald);
+  box-shadow: 0 0 12px var(--neon-emerald);
+}
+
+@keyframes completePulse {
+  0% { transform: scale(0.98); box-shadow: 0 0 15px var(--neon-emerald-glow); }
+  100% { transform: scale(1.02); box-shadow: 0 0 30px var(--neon-emerald-glow); }
+}
+
+.footer-info {
+  font-family: var(--font-mono);
+  font-size: clamp(7.5px, 1.7vw, 9.5px);
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+  text-align: center;
+}
+
+/* ===================================================================
+   PAGE-SPECIFIC COMPONENT DESIGNS
+   =================================================================== */
+
+/* Page 01: Activation Status Badge */
+.sound-activation-badge,
+.activation-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px dashed var(--neon-cyan);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-family: var(--font-mono);
+  font-size: clamp(9px, 2.3vw, 11px);
+  color: var(--neon-cyan);
+  text-align: center;
+}
+
+/* Page 02: Biometric Scanner Reticle */
+.biometric-scanner-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.scanner-reticle {
+  width: clamp(140px, 42vw, 220px);
+  height: clamp(140px, 42vw, 220px);
+  border-radius: 50%;
+  border: 2px dashed rgba(0, 240, 255, 0.4);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spinCW 6s linear infinite;
+}
+
+.scanner-reticle-inner {
+  width: 78%;
+  height: 78%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(157, 78, 221, 0.5);
+  animation: spinCCW 3.5s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.biometric-icon-wrap {
+  width: 58%;
+  height: 58%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.biometric-icon-svg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--neon-cyan);
+  filter: drop-shadow(0 0 8px var(--neon-cyan));
+}
+
+.scan-laser-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 14px var(--neon-cyan);
+  animation: laserSweep 2s ease-in-out infinite alternate;
+}
+
+@keyframes laserSweep {
+  0% { top: 10%; opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { top: 90%; opacity: 0.2; }
+}
+
+.scan-status-pill {
+  margin-top: 8px;
+  padding: 3px 12px;
+  border-radius: 20px;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-family: var(--font-mono);
+  font-size: clamp(9px, 2.3vw, 11px);
+  letter-spacing: 0.8px;
+  text-align: center;
+}
+
+.scan-status-pill.verified {
+  background: rgba(0, 245, 155, 0.15);
+  border-color: var(--neon-emerald);
+  color: var(--neon-emerald);
+  box-shadow: 0 0 10px var(--neon-emerald-glow);
+}
+
+/* Page 03: Floating Holographic Token */
+.token-stage-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hologram-token-wrap {
+  width: clamp(130px, 40vw, 200px);
+  height: clamp(130px, 40vw, 200px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: tokenHover 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes tokenHover {
+  0% { transform: translateY(-5px) rotateY(-10deg); }
+  100% { transform: translateY(5px) rotateY(10deg); }
+}
+
+.token-orbit-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px dashed rgba(0, 240, 255, 0.5);
+  transform: rotateX(65deg);
+  animation: spinCW 2.5s linear infinite;
+}
+
+.token-orbit-ring.ring-2 {
+  width: 118%;
+  height: 118%;
+  border: 1.5px solid rgba(255, 183, 3, 0.5);
+  transform: rotateX(60deg) rotateY(25deg);
+  animation: spinCCW 3.2s linear infinite;
+}
+
+.token-coin-svg {
+  width: 72%;
+  height: 72%;
+  filter: drop-shadow(0 0 18px rgba(0, 240, 255, 0.65));
+}
+
+/* Page 04: Futuristic Energy Reactor */
+.reactor-stage-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.reactor-rings-wrap {
+  width: clamp(140px, 42vw, 210px);
+  height: clamp(140px, 42vw, 210px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reactor-ring {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.reactor-ring-outer {
+  width: 100%;
+  height: 100%;
+  border: 2.5px dashed var(--neon-cyan);
+  animation: spinCW 3.5s linear infinite;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+}
+
+.reactor-ring-mid {
+  width: 78%;
+  height: 78%;
+  border: 2px solid var(--neon-purple);
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  animation: spinCCW 2.4s linear infinite;
+  box-shadow: 0 0 12px rgba(157, 78, 221, 0.4);
+}
+
+.reactor-ring-inner {
+  width: 55%;
+  height: 55%;
+  border: 2px dashed var(--neon-gold);
+  animation: spinCW 1.5s linear infinite;
+}
+
+.reactor-core-orb {
+  width: 35%;
+  height: 35%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, var(--neon-cyan) 40%, #0055ff 75%, transparent 100%);
+  box-shadow: 0 0 30px var(--neon-cyan), 0 0 50px rgba(0, 119, 255, 0.6);
+  animation: reactorCorePulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes reactorCorePulse {
+  0% { transform: scale(0.85); box-shadow: 0 0 18px var(--neon-cyan); }
+  100% { transform: scale(1.15); box-shadow: 0 0 40px var(--neon-cyan), 0 0 65px #0077ff; }
+}
+
+/* Page 06: Congratulations Celebration Card */
+.congrats-stage-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(3px, 0.8vh, 6px);
+  text-align: center;
+  position: relative;
+}
+
+.success-badge-wrap {
+  width: clamp(38px, 9vw, 54px);
+  height: clamp(38px, 9vw, 54px);
+  border-radius: 50%;
+  background: rgba(0, 245, 155, 0.18);
+  border: 2px solid var(--neon-emerald);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 18px var(--neon-emerald-glow);
+  flex-shrink: 0;
+  animation: badgePop 0.6s var(--ease-spring) forwards;
+}
+
+@keyframes badgePop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+.success-badge-svg {
+  width: 50%;
+  height: 50%;
+  stroke: var(--neon-emerald);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.congrats-headline {
+  font-family: var(--font-display);
+  font-size: clamp(13px, 3.4vw, 18px);
+  font-weight: 800;
+  color: var(--neon-emerald);
+  text-shadow: 0 0 10px var(--neon-emerald-glow);
+  letter-spacing: 0.8px;
+}
+
+.system-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 245, 155, 0.12);
+  border: 1px solid var(--neon-emerald);
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: clamp(8.5px, 2.1vw, 10.5px);
+  color: var(--neon-emerald);
+  letter-spacing: 0.6px;
+}
+
+.thank-you-box {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 8px;
+  padding: clamp(4px, 1vh, 8px) clamp(8px, 2vw, 14px);
+  max-width: 460px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.thank-you-quote {
+  font-family: var(--font-body);
+  font-size: clamp(10.5px, 2.4vw, 12.5px);
+  color: var(--text-primary);
+  line-height: 1.3;
+  font-style: italic;
+}
+
+.thank-you-author {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(7.5px, 1.8vw, 9.5px);
+  color: var(--neon-cyan);
+  margin-top: 3px;
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN & LANDSCAPE OPTIMIZATION
+   =================================================================== */
+
+/* Screen Height <= 600px (e.g. 320x568 iPhone SE, 360x640 Android) */
+@media (max-height: 600px) {
+  .page-content {
+    padding-top: max(4px, env(safe-area-inset-top));
+    padding-bottom: max(4px, env(safe-area-inset-bottom));
+    gap: 3px;
+  }
+  .brand-title {
+    font-size: 16px;
+  }
+  .brand-subtitle {
+    display: none;
+  }
+  .mission-hud-bar {
+    padding: 2px 8px;
+  }
+  .charge-stats-card {
+    padding: 2px 6px;
+    gap: 2px;
+  }
+  .primary-btn {
+    min-height: 38px;
+    height: 38px;
+    font-size: 11.5px;
+  }
+  .congrats-stage-box .robot-figure-wrap {
+    max-height: 80px !important;
+  }
+  .success-badge-wrap {
+    width: 34px;
+    height: 34px;
+  }
+  .thank-you-author {
+    display: none;
+  }
+  .scanner-reticle {
+    width: clamp(110px, 32vh, 160px);
+    height: clamp(110px, 32vh, 160px);
+  }
+  .hologram-token-wrap {
+    width: clamp(100px, 30vh, 150px);
+    height: clamp(100px, 30vh, 150px);
+  }
+  .reactor-rings-wrap {
+    width: clamp(110px, 32vh, 160px);
+    height: clamp(110px, 32vh, 160px);
+  }
+}
+
+/* Landscape Mode (e.g. 640x360 or 844x390) */
+@media (orientation: landscape) and (max-height: 540px) {
+  .page-content {
+    max-width: 900px;
+    padding: 3px 14px;
+    gap: 2px;
+  }
+  .robot-stage-card {
+    max-width: 780px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 4px 10px;
+  }
+  .stage-visual {
+    max-width: 45%;
+    height: 100%;
+  }
+  .charge-stats-card {
+    max-width: 50%;
+  }
+  .congrats-stage-box {
+    max-width: 48%;
+  }
+  .primary-btn {
+    min-height: 36px;
+    height: 36px;
+    font-size: 11.5px;
+  }
+  .footer-info {
+    display: none;
+  }
+}
+
+/* Ultra Small Width Screens (320px - 380px) */
+@media (max-width: 380px) {
+  .hud-telemetry-tag {
+    display: none;
+  }
+  .hud-pill span {
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .step-label {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+}
+
+@media (max-width: 335px) {
+  .page-content {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .step-label {
+    display: none;
+  }
+  .telemetry-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .telemetry-val {
+    font-size: 8px;
+  }
+  .primary-btn {
+    font-size: 11px;
+    letter-spacing: 0.6px;
+  }
+}
