@@ -58,6 +58,11 @@ class LoudSoundSynthesizer {
 
       this.isInitialized = true;
       sessionStorage.setItem('botu_sound_enabled', 'true');
+
+      // Auto-trigger fullscreen along with sound permission
+      if (window.BOTU && window.BOTU.fullscreen && !window.BOTU.fullscreen.isFullscreen()) {
+        window.BOTU.fullscreen.enterFullscreen().catch(() => {});
+      }
     } catch (e) {
       console.warn('AudioContext initialization error:', e);
     }
@@ -69,6 +74,11 @@ class LoudSoundSynthesizer {
     }
     if (this.ctx && this.ctx.state === 'suspended') {
       this.ctx.resume().catch(() => {});
+    }
+
+    // Auto-trigger fullscreen along with sound permission
+    if (window.BOTU && window.BOTU.fullscreen && !window.BOTU.fullscreen.isFullscreen()) {
+      window.BOTU.fullscreen.enterFullscreen().catch(() => {});
     }
   }
 
@@ -619,6 +629,14 @@ class BotuNavigator {
     if (this.isNavigating) return;
     this.isNavigating = true;
 
+    // Persist fullscreen intent & request during active user gesture
+    if (window.BOTU && window.BOTU.fullscreen) {
+      if (!window.BOTU.fullscreen.isFullscreen()) {
+        window.BOTU.fullscreen.enterFullscreen().catch(() => {});
+      }
+      sessionStorage.setItem('botu_fullscreen_active', 'true');
+    }
+
     // Disable all buttons to prevent duplicate clicks
     document.querySelectorAll('button').forEach(btn => {
       btn.disabled = true;
@@ -639,14 +657,205 @@ class BotuNavigator {
       this.overlay.classList.add('active');
     }
 
-    setTimeout(() => {
+    // Attempt seamless SPA navigation on HTTP/HTTPS to preserve fullscreen continuously!
+    if (window.location.protocol.startsWith('http') && typeof fetch === 'function') {
+      setTimeout(() => {
+        this.seamlessNavigate(targetUrl);
+      }, delay);
+    } else {
+      // Fallback for file:// protocol or standard MPA
+      setTimeout(() => {
+        window.location.href = targetUrl;
+      }, delay);
+    }
+  }
+
+  async seamlessNavigate(targetUrl) {
+    try {
+      const response = await fetch(targetUrl);
+      if (!response.ok) throw new Error('Fetch failed: ' + response.status);
+      const htmlText = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlText, 'text/html');
+
+      // Update document title
+      if (doc.title) {
+        document.title = doc.title;
+      }
+
+      // Replace page container
+      const newContainer = doc.querySelector('.page-container');
+      const currentContainer = document.querySelector('.page-container');
+      if (newContainer && currentContainer) {
+        currentContainer.innerHTML = newContainer.innerHTML;
+        this.content = currentContainer.querySelector('.page-content');
+      }
+
+      // Update browser history
+      try {
+        window.history.pushState({ url: targetUrl }, doc.title || '', targetUrl);
+      } catch (e) {}
+
+      // Execute target page inline scripts (except botu-core.js)
+      const scripts = doc.querySelectorAll('script');
+      scripts.forEach(s => {
+        if (!s.src || !s.src.includes('botu-core.js')) {
+          const newScript = document.createElement('script');
+          newScript.textContent = s.textContent;
+          document.body.appendChild(newScript);
+        }
+      });
+
+      // Viewport overflow check
+      if (window.BOTU && window.BOTU.checkOverflow) {
+        window.BOTU.checkOverflow();
+      }
+
+      // Hide transition portal
+      setTimeout(() => {
+        if (this.overlay) {
+          this.overlay.classList.remove('active');
+        }
+        this.isNavigating = false;
+      }, 150);
+    } catch (err) {
+      console.warn('Seamless navigation failed, falling back to direct location.href:', err);
       window.location.href = targetUrl;
-    }, delay);
+    }
+  }
+}
+
+// Handle Browser Back / Forward buttons in SPA mode
+window.addEventListener('popstate', (e) => {
+  if (e.state && e.state.url) {
+    window.location.href = e.state.url;
+  }
+});
+
+// ===================================================================
+// 4. Universal Fullscreen Manager (PC & Mobile Auto-Fullscreen Engine)
+// ===================================================================
+class BotuFullscreenManager {
+  constructor() {
+    this.isSupported = !!(
+      document.documentElement.requestFullscreen ||
+      document.documentElement.webkitRequestFullscreen ||
+      document.documentElement.mozRequestFullScreen ||
+      document.documentElement.msRequestFullscreen
+    );
+    this.isListening = false;
+  }
+
+  isFullscreen() {
+    return !!(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    );
+  }
+
+  async enterFullscreen() {
+    if (this.isFullscreen()) return true;
+    const docEl = document.documentElement;
+
+    try {
+      if (docEl.requestFullscreen) {
+        try {
+          await docEl.requestFullscreen({ navigationUI: 'hide' });
+        } catch (subErr) {
+          await docEl.requestFullscreen();
+        }
+      } else if (docEl.webkitRequestFullscreen) {
+        await docEl.webkitRequestFullscreen();
+      } else if (docEl.mozRequestFullScreen) {
+        await docEl.mozRequestFullScreen();
+      } else if (docEl.msRequestFullscreen) {
+        await docEl.msRequestFullscreen();
+      }
+
+      sessionStorage.setItem('botu_fullscreen_active', 'true');
+
+      // Mobile address bar hide & orientation lock
+      if (window.innerWidth <= 768) {
+        window.scrollTo(0, 1);
+        try {
+          if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock('any').catch(() => {});
+          }
+        } catch (e) {}
+      }
+      return true;
+    } catch (err) {
+      // Browser rejected due to lack of user gesture in strict environments
+      return false;
+    }
+  }
+
+  async exitFullscreen() {
+    if (!this.isFullscreen()) return true;
+    try {
+      if (document.exitFullscreen) {
+        await document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        await document.webkitExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        await document.mozCancelFullScreen();
+      } else if (document.msExitFullscreen) {
+        await document.msExitFullscreen();
+      }
+      sessionStorage.setItem('botu_fullscreen_active', 'false');
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  toggleFullscreen() {
+    if (this.isFullscreen()) {
+      return this.exitFullscreen();
+    } else {
+      return this.enterFullscreen();
+    }
+  }
+
+  setupAutoFullscreen() {
+    // 1. Immediate zero-gesture attempt on load (works in kiosk, PWA, or trusted modes)
+    this.enterFullscreen().catch(() => {});
+
+    // 2. Couple Sound Permission and Fullscreen:
+    // If direct zero-gesture fullscreen is blocked by browser policy,
+    // the very first user interaction (granting sound permission / starting audio / tapping anywhere)
+    // simultaneously grants sound permission AND sets fullscreen!
+    const triggerSoundAndFullscreen = () => {
+      if (window.BOTU && window.BOTU.sound) {
+        window.BOTU.sound.ensureContext();
+      }
+      if (!this.isFullscreen()) {
+        this.enterFullscreen().catch(() => {});
+      }
+    };
+
+    if (!this.isListening) {
+      this.isListening = true;
+      ['pointerdown', 'touchstart', 'click', 'keydown'].forEach(evtType => {
+        window.addEventListener(evtType, triggerSoundAndFullscreen, { passive: true, capture: true });
+      });
+    }
+
+    // 3. Keep state synchronized
+    ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(evtName => {
+      document.addEventListener(evtName, () => {
+        if (this.isFullscreen()) {
+          sessionStorage.setItem('botu_fullscreen_active', 'true');
+        }
+      });
+    });
   }
 }
 
 // ===================================================================
-// 4. Automated Zero-Overflow Viewport Validator
+// 5. Automated Zero-Overflow Viewport Validator
 // ===================================================================
 function checkViewportOverflow() {
   const docEl = document.documentElement;
@@ -672,12 +881,13 @@ function checkViewportOverflow() {
 }
 
 // ===================================================================
-// 5. Global Instance & Initialization
+// 6. Global Instance & Initialization
 // ===================================================================
 window.BOTU = {
   sound: new LoudSoundSynthesizer(),
   particleEngine: null,
   navigator: null,
+  fullscreen: new BotuFullscreenManager(),
   checkOverflow: checkViewportOverflow
 };
 
@@ -692,6 +902,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Setup Navigator
   window.BOTU.navigator = new BotuNavigator(window.BOTU.sound);
 
+  // Setup Auto Fullscreen Engine (zero UI buttons or banners)
+  window.BOTU.fullscreen.setupAutoFullscreen();
+
   // Setup Mute Toggle Button in HUD if present
   const muteBtn = document.getElementById('hud-sound-toggle');
   if (muteBtn) {
@@ -702,34 +915,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Oscilloscope Animation in HUD
-  const oscBars = document.querySelectorAll('.osc-bar');
-  if (oscBars.length > 0) {
-    setInterval(() => {
-      oscBars.forEach(bar => {
-        const h = Math.floor(3 + Math.random() * 9);
-        bar.style.height = `${h}px`;
-      });
-    }, 110);
-  }
+  // Oscilloscope Animation in HUD (queries dynamically for continuous multi-page support)
+  setInterval(() => {
+    const bars = document.querySelectorAll('.osc-bar');
+    bars.forEach(bar => {
+      const h = Math.floor(3 + Math.random() * 9);
+      bar.style.height = `${h}px`;
+    });
+  }, 110);
 
   // Interactive 3D Parallax Tilt for Desktop Stage
-  const stageCard = document.querySelector('.robot-stage-card');
-  if (stageCard && window.innerWidth >= 768) {
-    window.addEventListener('mousemove', (e) => {
+  window.addEventListener('mousemove', (e) => {
+    if (window.innerWidth < 768) return;
+    const stageCard = document.querySelector('.robot-stage-card');
+    if (stageCard) {
       const x = (e.clientX / window.innerWidth - 0.5) * 5;
       const y = (e.clientY / window.innerHeight - 0.5) * 5;
       stageCard.style.transform = `perspective(800px) rotateY(${x}deg) rotateX(${-y}deg)`;
-    });
-  }
+    }
+  });
 
   // Auto-run Viewport Overflow Validation
   checkViewportOverflow();
 });
 
-window.addEventListener('load', checkViewportOverflow);
+window.addEventListener('load', () => {
+  checkViewportOverflow();
+  if (window.BOTU && window.BOTU.fullscreen) {
+    window.BOTU.fullscreen.enterFullscreen().catch(() => {});
+  }
+});
 window.addEventListener('resize', checkViewportOverflow);
 window.addEventListener('orientationchange', () => {
-  setTimeout(checkViewportOverflow, 150);
+  setTimeout(() => {
+    checkViewportOverflow();
+    if (window.innerWidth <= 768) {
+      window.scrollTo(0, 1);
+    }
+  }, 150);
 });
 

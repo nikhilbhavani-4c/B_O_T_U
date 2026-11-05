@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="cyberGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#02040a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hornGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#0077ff"/>
+    </linearGradient>
+    <linearGradient id="mechaMetal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="512" height="512" rx="112" fill="#02040a"/>
+  <rect width="504" height="504" x="4" y="4" rx="108" fill="none" stroke="#00f0ff" stroke-width="3" stroke-opacity="0.4"/>
+  <circle cx="256" cy="256" r="230" fill="url(#cyberGlow)"/>
+
+  <!-- Futuristic Cyber Rings -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="#00f0ff" stroke-width="2.5" stroke-opacity="0.35" stroke-dasharray="16 10"/>
+  <circle cx="256" cy="256" r="165" fill="none" stroke="#9d4edd" stroke-width="2" stroke-opacity="0.4"/>
+
+  <!-- Mecha Buffalo Horns (B.O.T.U. Insignia) -->
+  <path d="M120 190 C95 85 175 40 220 105 C205 135 180 165 170 195 Z" fill="url(#hornGrad)" stroke="#00f0ff" stroke-width="3"/>
+  <path d="M392 190 C417 85 337 40 292 105 C307 135 332 165 342 195 Z" fill="url(#hornGrad)" stroke="#00f0ff" stroke-width="3"/>
+
+  <!-- Mecha Skull / Helmet Structure -->
+  <polygon points="172,160 340,160 376,290 320,400 192,400 136,290" fill="url(#mechaMetal)" stroke="#00f0ff" stroke-width="6"/>
+
+  <!-- Brow Plate Accent -->
+  <polygon points="190,170 322,170 300,205 212,205" fill="#020617" stroke="#ffb703" stroke-width="2.5"/>
+
+  <!-- Glowing Cyber Visor Eyes -->
+  <rect x="184" y="238" width="54" height="26" rx="8" fill="#ffb703" opacity="0.95"/>
+  <rect x="274" y="238" width="54" height="26" rx="8" fill="#ffb703" opacity="0.95"/>
+  <circle cx="211" cy="251" r="5" fill="#ffffff"/>
+  <circle cx="301" cy="251" r="5" fill="#ffffff"/>
+
+  <!-- Quantum Arc Reactor Chest Core -->
+  <circle cx="256" cy="336" r="34" fill="#02040a" stroke="#00f59b" stroke-width="5"/>
+  <circle cx="256" cy="336" r="22" fill="#00f59b" opacity="0.85"/>
+  <polygon points="256,318 270,340 256,354 242,340" fill="#ffffff"/>
+
+  <!-- B.O.T.U. Wordmark -->
+  <text x="256" y="465" font-family="'Orbitron', sans-serif" font-size="36" font-weight="900" fill="#00f0ff" text-anchor="middle" letter-spacing="8">B.O.T.U.</text>
+</svg>
+

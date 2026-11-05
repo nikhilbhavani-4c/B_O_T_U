@@ -17,6 +17,7 @@ The narrative centers on **B.O.T.U.**, a formidable cosmic mecha guardian whose 
 
 ### Key Highlights
 - **100% Zero Runtime Dependencies**: Pure HTML5, modern CSS3, vanilla JavaScript, Canvas 2D, and Web Audio API. No external JS libraries (no React, Vue, Three.js, jQuery, or Howler).
+- **Universal Auto-Fullscreen Engine (PC & Mobile)**: Automatic fullscreen activation on open (zero-gesture attempt on load + coupled sound permission auto-activation), seamless persistent fullscreen across all 6 pages via SPA transitions, and PWA `manifest.json` standalone mode for Android/iOS with zero UI clutter.
 - **Zero Asset Vulnerability**: Contains **0 external image files** and **0 audio files** (`.mp3`/`.wav`). All illustrations are mathematically crafted inline SVGs, and all sound effects are procedurally synthesized in real time via the Web Audio API.
 - **Strict Zero-Scrollbar Guarantee**: Tailored with dynamic viewport technology (`100dvh`), `overscroll-behavior: none`, locked headers/footers, and flexible visual stages. Content never clips or triggers scrollbars on screens from **320px mobile up to 4K displays**.
 - **High-Loudness Audio Engine**: Built-in multi-stage dynamics compression and dual-stage output booster designed to cut through noisy event halls and convention floors.
@@ -224,6 +225,27 @@ chrome.exe --kiosk "http://localhost:8080/index.html" --autoplay-policy=no-user-
 # Microsoft Edge Kiosk Launch Command (Windows)
 msedge.exe --kiosk "http://localhost:8080/index.html" --edge-kiosk-type=fullscreen --autoplay-policy=no-user-gesture-required
 ```
+
+---
+
+## 📺 Universal Auto-Fullscreen Architecture (PC & Mobile)
+
+To provide an immersive arcade/kiosk terminal experience, B.O.T.U. implements a multi-tiered Fullscreen Engine across both PC desktop and mobile devices:
+
+1. **Immediate Zero-Gesture Attempt on Load**:
+   - Executes `requestFullscreen()` immediately upon script execution and page load.
+   - Automatically enters full screen on environments that allow zero-gesture fullscreen (PWAs, Chrome kiosk mode, shortcuts with `--start-fullscreen`, or trusted origins).
+2. **Instant One-Touch / One-Click Auto-Activation**:
+   - Modern browsers require user activation for the Fullscreen API. The engine hooks global capturing listeners (`click`, `touchstart`, `pointerdown`, `keydown`).
+   - The very first tap anywhere on mobile or mouse click on PC instantly activates true borderless fullscreen!
+3. **Seamless Multi-Stage Fullscreen Persistence**:
+   - `BotuNavigator` leverages seamless SPA page transitions on HTTP/HTTPS to navigate across all 6 pages without document reloads, preserving fullscreen mode and audio context continuously from boot to celebration.
+   - Graceful fallback for `file:///` MPA navigation with automatic fullscreen restoration on subsequent pages.
+4. **Coupled Sound Permission & Auto-Fullscreen**:
+   - If direct zero-gesture fullscreen is gated by browser autoplay policies, user interaction granting sound permission (such as the start button or any screen interaction) simultaneously sets true full screen without any manual fullscreen button clutter.
+5. **Mobile PWA & Apple Web App Support**:
+   - Includes `manifest.json` configured with `"display": "fullscreen"`.
+   - Apple mobile web app capable meta tags (`black-translucent` status bar) and vector icons (`icon-192.svg`, `icon-512.svg`).
 
 ---
 

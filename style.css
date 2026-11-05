@@ -79,6 +79,20 @@ body {
   -webkit-user-select: none;
 }
 
+/* Fullscreen API Native Element Styling */
+:fullscreen,
+:-webkit-full-screen,
+:-moz-full-screen,
+:-ms-fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-color: var(--bg-deep) !important;
+}
+
 /* Master Viewport Container */
 .page-container {
   width: 100%;
